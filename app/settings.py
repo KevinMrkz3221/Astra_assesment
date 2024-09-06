@@ -15,7 +15,7 @@ class Settings(BaseSettings):
 
     
     INSTALLED_ROUTERS: List[str] = [
-        'app.routers'
+        'core.users.routers'
     ]
 
     MIDDLEWARES: List[str] = [

@@ -13,7 +13,7 @@ app = FastAPI(
 
 for router_path in settings.INSTALLED_ROUTERS:
     module = importlib.import_module(router_path)
-    app.include_router(module.routes)
+    app.include_router(module.router)
 
 for middleware in settings.MIDDLEWARES:
     module = importlib.import_module(middleware)
