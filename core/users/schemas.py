@@ -14,6 +14,9 @@ class UserCreate(UserBase):
     @field_validator('password')
     def hash_password(cls, value: str):
         return pwd_context.hash(value)
+    
+
+
 
 class User(UserBase):
     id: int

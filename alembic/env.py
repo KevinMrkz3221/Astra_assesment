@@ -1,5 +1,8 @@
 from pathlib import Path
 import sys
+import os
+import importlib
+import pkgutil
 
 from logging.config import fileConfig
 
@@ -9,6 +12,8 @@ from sqlalchemy import pool
 from alembic import context
 
 from app.database import  SQLALCHEMY_DATABASE_URL, Base
+
+
 
 sys.path.append(str(Path(__file__).resolve().parent.parent))
 #sqlite:///app.db
@@ -35,6 +40,17 @@ print(Base.metadata)
 # my_important_option = config.get_main_option("my_important_option")
 # ... etc.
 
+def import_all_models_from_core():
+    core_dir = os.path.join(os.path.dirname(__file__), '..', 'core')
+    core_pkg = 'core'
+
+    for root, dirs, files in os.walk(core_dir):
+        for file in files:
+            if file == 'models.py':
+                module_name = os.path.relpath(os.path.join(root, file), core_dir).replace(os.sep, '.').replace('.py', '')
+                importlib.import_module(f'{core_pkg}.{module_name}')
+
+import_all_models_from_core()
 
 def run_migrations_offline() -> None:
     """Run migrations in 'offline' mode.
