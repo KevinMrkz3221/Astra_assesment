@@ -1,5 +1,4 @@
 from fastapi import FastAPI
-import importlib
 import uvicorn 
 
 from app.settings import settings
@@ -13,7 +12,6 @@ app = FastAPI(
 
 settings.routers(app)
 settings.middlewares(app)
-
 
 if __name__ == '__main__':
     uvicorn.run("main:app", reload=True)

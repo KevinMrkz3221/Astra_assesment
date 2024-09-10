@@ -1,4 +1,6 @@
-from sqlalchemy import Column, Integer, String
+from sqlalchemy import Column, Integer, String, ForeignKey
+from sqlalchemy.orm import relationship
+
 from app.database import Base
 
 class Note(Base):
@@ -8,3 +10,5 @@ class Note(Base):
     title = Column(String, index=True)
     description = Column(String, index=True)
 
+    user_id = Column(Integer, ForeignKey('users.id'), nullable=False)
+    user = relationship("User", back_populates="notes")
