@@ -1,6 +1,4 @@
 from pydantic_settings import BaseSettings
-from sqlalchemy import create_engine, Engine
-from sqlalchemy.ext.declarative import declarative_base
 from passlib.context import CryptContext
 from typing import List
 import importlib
@@ -19,7 +17,8 @@ class Settings(BaseSettings):
     
     INSTALLED_ROUTERS: List[str] = [
         'core.users.routers',
-        'core.auth.routers'
+        'core.auth.routers',
+        'core.notes.routers'
     ]
 
     MIDDLEWARES: List[str] = [

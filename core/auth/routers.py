@@ -20,11 +20,8 @@ async def test_auth(user: User = Depends(get_current_user)):
 @router.post('/login', tags=['Auth'])
 async def login(login_data: UserBase, db: Session = Depends(get_db)):
     user = db.query(User).filter(User.username == login_data.username).first()
-
-
+    
     if not user or not verify_password(login_data.password, user.password):
-        print("Contraseña enviada:", login_data.password)
-        print("Contraseña almacenada:", user.password)
         raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail='Invalid credentials')
     
 
