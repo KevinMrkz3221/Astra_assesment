@@ -51,7 +51,6 @@ async def update_note(id: int, note_update: NoteUpdate, db: Session = Depends(ge
     if note is None:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Note not found")
 
-    # Actualizar los campos solo si han sido proporcionados
     if note_update.title is not None:
         note.title = note_update.title
     if note_update.description is not None:
