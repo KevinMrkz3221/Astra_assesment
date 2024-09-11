@@ -4,7 +4,7 @@ from fastapi.responses import JSONResponse, RedirectResponse
 
 from app.database import get_db, Session
 
-from core.users.models import User 
+from core.auth.models import User 
 from core.auth.src import get_current_user
 
 from .schemas import NoteCreate, NoteUpdate, NoteSchema

@@ -9,7 +9,7 @@ from datetime import datetime, timedelta
 
 from app.database import get_db
 from app.settings import settings, pwd_context
-from core.users.models import User
+from .models import User
 
 SECRET_KEY = settings.SECRET_KEY
 ALGORITHM = settings.ALGORITHM
@@ -36,24 +36,6 @@ def create_access_token(data: dict, expires_delta: timedelta = None):
     encoded_jwt = jwt.encode(to_encode, SECRET_KEY, algorithm=ALGORITHM)
     return encoded_jwt
 
-# Verifica que el token a utilizar sea valido
-def verify_access_token(token: str):
-    try:
-        payload = jwt.decode(token, SECRET_KEY, algorithms=[ALGORITHM])
-        username: str = payload.get("sub")
-        if username is None:
-            raise credentials_exception
-        return username
-    except jwt.ExpiredSignatureError:
-        raise HTTPException(
-            status_code=status.HTTP_401_UNAUTHORIZED,
-            detail="Token has expired",
-        )
-    except jwt.InvalidTokenError:
-        raise HTTPException(
-            status_code=status.HTTP_401_UNAUTHORIZED,
-            detail="Invalid token",
-        )
 
 # Decodifica el access_token y obtiene el usuario que lo genero
 def get_current_user(token: str = Depends(oauth2_scheme), db: Session = Depends(get_db)):

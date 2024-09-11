@@ -16,7 +16,6 @@ class Settings(BaseSettings):
 
     
     INSTALLED_ROUTERS: List[str] = [
-        'core.users.routers',
         'core.auth.routers',
         'core.notes.routers'
     ]
