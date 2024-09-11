@@ -44,8 +44,8 @@ Esta API permite la creación de usuarios y la gestión de tareas o notas por pa
 
 1. Clona este repositorio:
     ```bash
-    git clone https://github.com/usuario/proyecto-fastapi.git
-    cd proyecto-fastapi
+    git clone https://github.com/KevinMrkz3221/Astra_assesment
+    cd Astra_assesment
     ```
 
 2. Crea un entorno virtual:
